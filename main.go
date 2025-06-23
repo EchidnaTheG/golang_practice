@@ -19,6 +19,14 @@ func Request(httpCode int, serverNode string) int {
 
 
 
+func triple(x,y,z int)(int, int, int){
+	x *=3
+	y*= 3
+	z*= 3
+	return x, y, z
+}
+
+
 func main() {
 	RESPONSEVALUE := Request(2010, "America: Miami")
 	switch RESPONSEVALUE  {
@@ -33,7 +41,8 @@ func main() {
 		fmt.Println("=======================================")
 		fmt.Println("O P E R A T I O N A L	F A I L U R E")
 	}
-
-
+	fmt.Println(triple(42,12,11))
+	test_null_return1, test_null_return2, _ := triple(31,32,24323421)
+	println(test_null_return1,test_null_return2)
 }
 

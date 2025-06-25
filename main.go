@@ -17,6 +17,22 @@ func Request(httpCode int, serverNode string) int {
 }
 }
 
+//golang uses a lot of the early return style instead of nested flow statements
+/**for example
+func example( x, y int)(int){
+	if x == 1 && y == 0{
+	return 10
+	}
+	if x....
+	etc, the idea is to return early instead of setting in a deep nested set of conditions
+}
+**/
+
+
+func applyAddFunction( sum func(x int) int, number int) int {
+	return sum(number)
+}
+
 
 
 func triple(x,y,z int)(int, int, int){
@@ -26,6 +42,7 @@ func triple(x,y,z int)(int, int, int){
 	return x, y, z
 }
 
+// REMINDERRR, NO FUNCTION CALLS OR STUFF GOING ON OUTSIDE OF MAIN< EVERYTHING OUTSIDE OF MAIN EXISTS TO BE USED IN SOMETHING IN MAIN< OR BY SOMETHING THAT WILL EVENTRUALLY BE USED IN MAIN
 
 func main() {
 	RESPONSEVALUE := Request(2010, "America: Miami")
@@ -44,5 +61,8 @@ func main() {
 	fmt.Println(triple(42,12,11))
 	test_null_return1, test_null_return2, _ := triple(31,32,24323421)
 	println(test_null_return1,test_null_return2)
+	fmt.Println(applyAddFunction(func(x int) int {
+	return x + x}, 2))
+	
 }
 

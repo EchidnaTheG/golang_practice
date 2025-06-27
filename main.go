@@ -43,6 +43,17 @@ func triple(x,y,z int)(int, int, int){
 }
 
 // REMINDERRR, NO FUNCTION CALLS OR STUFF GOING ON OUTSIDE OF MAIN< EVERYTHING OUTSIDE OF MAIN EXISTS TO BE USED IN SOMETHING IN MAIN< OR BY SOMETHING THAT WILL EVENTRUALLY BE USED IN MAIN
+//DEFER KEYWORK : BASICALLY A FUNCTION CALL THAT ONLY EXECUTES ONCE THE FUNCTION ITS CALLED IN RETURNS ANY VALUE , OR WHEN THE FUNCTION ITS CALLED ENDS, IF MULTIPLE DEFERS, THEY FUNCTION IN STACK ORDER (BOTTOM TO TOP), IN OTHER WORDS< THIS IS LIKE CALLING A FUNCTION ALWAYS BEFORE RETURTNING OR FINSIHING THE FUNCTION WHERE ITS LCOATED AT
+func write_to_db( ) {
+	defer fmt.Println("DB CLOSED")
+	fmt.Println("Writing to DB...")
+	fmt.Println("Writing to DB...")
+	fmt.Println("Writing to DB...")
+	fmt.Println("Writing to DB...")
+	fmt.Println("Writing to DB...")
+	fmt.Println("DB OPERATION DONE!")
+}
+
 
 func main() {
 	RESPONSEVALUE := Request(2010, "America: Miami")
@@ -63,6 +74,6 @@ func main() {
 	println(test_null_return1,test_null_return2)
 	fmt.Println(applyAddFunction(func(x int) int {
 	return x + x}, 2))
-	
+	write_to_db()
 }
 

@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+
+//GO IS BLOCK SCOPED, NOT FUNCTION SCOPED, A BLOCK BEING WELL, BLOCK, there is the main block, and new ones made by curlybraces {}
 func Logger(fname, lname, registerDate, planType string, isOnUpgradeList bool, numOfDevices, numOfRelatives int) string {
 	logMessage := fmt.Sprintf(
 		"\n Name: %v %v\n Date Registered: %v\n Subscription Type: %v\n OnUpgradeList: %v\n Number of Devices: %v\n Number of Relatives: %v\n",
@@ -53,6 +55,42 @@ func write_to_db( ) {
 	fmt.Println("Writing to DB...")
 	fmt.Println("DB OPERATION DONE!")
 }
+
+
+// A closure is a function that references variables from outside its own function body. The function may access and assign to the referenced variables.
+func adder() func(int) int {
+	sum := 0
+	return func(num int) int{
+		sum += num
+		return sum
+	}
+}
+// Function currying is a concept from functional programming and involves partial application of functions. It allows a function with multiple arguments to be transformed into a sequence of functions, each taking a single argument. For example
+func MATTH() {
+  squareFunc := selfMath(multiply)
+  doubleFunc := selfMath(add)
+
+  fmt.Println(squareFunc(5))
+  // prints 25
+
+  fmt.Println(doubleFunc(5))
+  // prints 10
+}
+
+func multiply(x, y int) int {
+  return x * y
+}
+
+func add(x, y int) int {
+  return x + y
+}
+
+func selfMath(mathFunc func(int, int) int) func (int) int {
+  return func(x int) int {
+    return mathFunc(x, x)
+  }
+}
+
 
 
 func main() {

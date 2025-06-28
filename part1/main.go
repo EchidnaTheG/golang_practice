@@ -92,6 +92,13 @@ func selfMath(mathFunc func(int, int) int) func (int) int {
 }
 
 
+type person struct{
+age int
+name string
+gender string
+}
+
+
 
 func main() {
 	RESPONSEVALUE := Request(2010, "America: Miami")
@@ -113,5 +120,8 @@ func main() {
 	fmt.Println(applyAddFunction(func(x int) int {
 	return x + x}, 2))
 	write_to_db()
+	myPerson := person{}
+	myPerson.name = "Mike"
+	fmt.Println(myPerson)
 }
 

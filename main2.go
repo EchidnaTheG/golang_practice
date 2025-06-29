@@ -39,6 +39,22 @@ func updateCarModelStruct(pointer *Car){
 	pointer.model = "Honda"
 }
 
+// there is no inheritance in golang, but you can make a struct data-only inheritance...sort of, by using embedded structs
+
+type car struct {
+  brand string
+  model string
+}
+
+type truck struct {
+  // "car" is embedded, so the definition of a
+  // "truck" now also additionally contains all
+  // of the fields of the car struct
+  car
+  bedSize int
+}
+
+
 
 
 
@@ -65,4 +81,15 @@ updateCarModelStruct(Mycarpointer)
 fmt.Println(Mycar)
 //it works! and is efficient, optimal
 //we right now are using named structs, we always should unless we truly don't ever require the struct to be used more than once
+
+lanesTruck := truck{
+  bedSize: 10,
+  car: car{
+    brand: "Toyota",
+    model: "Tundra",
+  },
+}
+
+fmt.Println(lanesTruck.brand) // Toyota
+fmt.Println(lanesTruck.model) // Tundra
 }

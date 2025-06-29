@@ -54,6 +54,26 @@ type truck struct {
   bedSize int
 }
 
+// We can also make "methods" in golang, kinda.
+ //Methods are just functions that have a receiver. A receiver is a special parameter that syntactically goes before the name of the function.
+type rect struct {
+  width int
+  height int
+}
+
+// area has a receiver of (r rect)
+// rect is the struct
+// r is the placeholder
+func (r rect) area() int {
+  return r.width * r.height
+}
+
+var r = rect{
+  width: 5,
+  height: 10,
+}
+
+
 
 
 
@@ -92,4 +112,6 @@ lanesTruck := truck{
 
 fmt.Println(lanesTruck.brand) // Toyota
 fmt.Println(lanesTruck.model) // Tundra
+fmt.Println(r.area())
+// prints 50
 }

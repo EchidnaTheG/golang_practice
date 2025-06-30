@@ -9,8 +9,27 @@ import "fmt"
 
     Passing a pointer (*Person) to a function avoids copying the entire struct.
 
-    This is faster and uses less memory, especially for large structs.**/
+    This is faster and uses less memory, especially for large structs.
 
+structs memory layout- structs sit in memory in a contiguous block, with fields placed one after another as defined in the struct. Long story short, make structs start from largest field to smallest in terms of memory size
+example
+
+this is 4 bytes
+type stats struct {
+	Reach    uint16
+	NumPosts uint8
+	NumLikes uint8
+}
+
+An example of how NOT to do structs would be this
+this is 6 bytes, 2 wasted due to padding
+type stats struct {
+	NumPosts uint8
+	Reach    uint16
+	NumLikes uint8
+}
+	
+**/
 
 type Car struct{
 	model string

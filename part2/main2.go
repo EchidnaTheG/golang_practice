@@ -28,7 +28,18 @@ type stats struct {
 	Reach    uint16
 	NumLikes uint8
 }
-	
+Empty structs are used in Go as a unary value.
+
+
+// anonymous empty struct type
+empty := struct{}{}
+
+// named empty struct type
+type emptyStruct struct{}
+empty := emptyStruct{}
+
+The cool thing about empty structs is that they're the smallest possible type in Go: they take up zero bytes of memory. they're used surprisingly often! Mostly with maps and channels.
+
 **/
 
 type Car struct{
@@ -134,3 +145,41 @@ fmt.Println(lanesTruck.model) // Tundra
 fmt.Println(r.area())
 // prints 50
 }
+
+
+
+
+
+/**
+WAYS TO USE STRUCTS, METHODS, AND EMBEDDED STRUCTS
+
+type User struct {
+	Name string
+	Membership
+}
+
+type Membership struct {
+	Type             string
+	MessageCharLimit int
+}
+
+func newUser(name string, membershipType string) User {
+	membership := Membership{Type: membershipType}
+	if membershipType == "premium" {
+		membership.MessageCharLimit = 1000
+	} else {
+		membership.Type = "standard"
+		membership.MessageCharLimit = 100
+	}
+	return User{Name: name, Membership: membership}
+}
+
+func (sms User) SendMessage(message string ,MessageLength int) (string, bool){
+	if sms.Membership.MessageCharLimit >= MessageLength{
+		return message, true
+	}else {
+		return "", false
+	}
+}
+
+**/

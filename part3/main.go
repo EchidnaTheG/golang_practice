@@ -213,6 +213,62 @@ func processNotification(n notification) (string, int) {
 	}
 }
 
+
+
+type Cargo interface{
+	manifest() string
+}
+
+type parcel struct{
+	location string
+	weight string
+	isFlammable bool
+	isDelicate bool
+}
+
+type container struct{
+	location string
+	weight string
+	isFlammable bool
+	isDelicate bool
+	size float64
+}
+
+func (p parcel) manifest() string{
+	manifest := fmt.Sprintf("Location: %v\nWeight: %v\nIsFlammable: %v\nIsDelicate: %v", p.location, p.weight, p.isFlammable, p.isDelicate,)
+	return manifest
+}
+
+func (c container) manifest() string{
+	manifest := fmt.Sprintf("Location: %v\nWeight: %v\nIsFlammable: %v\nIsDelicate: %v\nSize: %v", c.location, c.weight, c.isFlammable, c.isDelicate,c.size)
+	return manifest
+}
+func send(C Cargo, destination string) string{
+	switch v := C.(type){
+	case parcel:
+		if (v.isFlammable || v.isDelicate)&& (destination=="Africa"){
+			return "Denied!"
+		}
+		return "Granted!"
+	case container:
+		if (v.isFlammable && v.isDelicate)&& (destination=="Africa"){
+			return "Denied!"
+		}	
+		return "Granted"
+		default:
+			return "Unknown Detected"
+	}
+
+}
+
 func main(){
-	
+	randomdmfromfrontend := directMessage{"robin", "wassup",22,false}
+	randomdmprocessed,value :=processNotification(randomdmfromfrontend)
+	fmt.Println(randomdmprocessed,value)
+	if value < 50{
+		fmt.Println("Seems like we are getting some spam today...")
+	}
+	randomContainer := container{"america", "2812 pounds",true, false, 31331.0}
+	fmt.Println(randomContainer.manifest())
+	fmt.Println(send(randomContainer, "Africa"))
 }

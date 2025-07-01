@@ -161,6 +161,58 @@ func getExpenseReport(e expense) (string, float64) {
 // or in another set of words, The interface just sets the rules, the types that follow those rules come later and don’t need to be mentioned by the interface itself, get it?? Just use type assertions in the interface itself for this
 // 3. Interfaces Are Not Classes!!!
 
+
+
+
+type notification interface {
+	importance() int
+}
+
+type directMessage struct {
+	senderUsername string
+	messageContent string
+	priorityLevel  int
+	isUrgent       bool
+}
+
+type groupMessage struct {
+	groupName      string
+	messageContent string
+	priorityLevel  int
+}
+
+type systemAlert struct {
+	alertCode      string
+	messageContent string
+}
+
+func (dm directMessage) importance() int{
+	if dm.isUrgent{
+		return 50
+	}
+	return dm.priorityLevel
+}
+func (gp groupMessage) importance() int {
+	return gp.priorityLevel
+}
+
+func(sy systemAlert) importance() int{
+	return 100
+}
+
+func processNotification(n notification) (string, int) {
+	switch v := n.(type) {
+	case directMessage:
+		return v.senderUsername, v.importance()
+	case groupMessage:
+		return v.groupName , v.importance()
+	case systemAlert:
+		return v.alertCode , v.importance()
+	default:
+		return "", 0
+	}
+}
+
 func main(){
 	
 }
